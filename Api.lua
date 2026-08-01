@@ -105,6 +105,27 @@ function Api:LoadCircle()
     end 
 end
 
+function Api:JoinDiscord()
+    local http = (syn and syn.request) or (psm and psm.request) or request
+    if http then
+        pcall(function()
+            local HttpService = game:GetService("HttpService")
+            http({
+                Url = "http://127.0.0.1:6463/rpc?v=1",
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json",
+                    ["Origin"] = "https://discord.com"
+                },
+                Body = HttpService:JSONEncode({
+                    cmd = "INVITE_BROWSER",
+                    args = {code = "Gc5QkQCdFA"},
+                    nonce = HttpService:GenerateGUID(true)
+                })
+            })
+        end)
+    end
+end
 
 function Api:PrintNiga()
     print([[
