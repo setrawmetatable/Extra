@@ -1,5 +1,1 @@
-if not Nigga then 
-  return 
-else
-  print("Test")
-end 
+if not Nigga then return end
