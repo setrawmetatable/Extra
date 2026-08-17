@@ -12,7 +12,7 @@ local Api = {
     Market = game:GetService("MarketplaceService"),
     Rep = game:GetService("ReplicatedStorage"),
     Text = game:GetService("TextService"),
-    Localization = game:GetService("LocalizationService")
+    Localization = game:GetService("LocalizationService"),
 
     Player = game:GetService("Players").LocalPlayer,
     Name = game:GetService("Players").LocalPlayer.Name,
