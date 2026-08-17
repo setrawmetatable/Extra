@@ -6,18 +6,19 @@ local Api = {
     Uis = game:GetService("UserInputService"),
     Vim = game:GetService("VirtualInputManager"),
     Tween = game:GetService("TweenService"),
-    Core = game:GetService("CoreGui"),
+    Core = gethui() or game:GetService("CoreGui"),
     Light = game:GetService("Lighting"),
     Http = game:GetService("HttpService"),
     Market = game:GetService("MarketplaceService"),
     Rep = game:GetService("ReplicatedStorage"),
     Text = game:GetService("TextService"),
-    
+    Localization = game:GetService("LocalizationService")
+
     Player = game:GetService("Players").LocalPlayer,
     Name = game:GetService("Players").LocalPlayer.Name,
     Camera = workspace.CurrentCamera,
     PlaceId = game.PlaceId,
-    
+
     Mouse = game:GetService("Players").LocalPlayer:GetMouse(),
     Screen = Instance.new("ScreenGui"),
 
@@ -27,7 +28,7 @@ local Api = {
     Esp = {},
     Crosshair = {},
     Circle = {},
-}  
+}
 
 local Function = {
     {name = "Drawing", present = type(Drawing) == "table" or type(Drawing) == "userdata"},
@@ -56,7 +57,7 @@ function Api:Random()
 	local chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	local name = ""
 	local lenght = math.random(5, 10)
-	for i = 1, lenght do 
+	for i = 1, lenght do
 		local rand = math.random(1, #chars)
 		name = name .. string.sub(chars, rand, rand)
 	end
@@ -92,17 +93,17 @@ end
 
 function Api:LoadEsp()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua"))()
-    if getgenv().Esp then 
+    if getgenv().Esp then
         Api.Esp = getgenv().Esp
-    end 
+    end
 end
 
 function Api:LoadCircle()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Crosshair"))()
-    if getgenv().Settings then 
+    if getgenv().Settings then
         Api.Crosshair = getgenv().Settings.Crosshair
         Api.Circle = getgenv().Settings.Circle
-    end 
+    end
 end
 
 function Api:JoinDiscord()
@@ -125,17 +126,6 @@ function Api:JoinDiscord()
             })
         end)
     end
-end
-
-function Api:PrintNiga()
-    print([[
-             _   ___             __              
-                        / | / (_)___ _____ _/ /___  ________ 
-                       /  |/ / / __ `/ __ `/ / __ \/ ___/ _ \
-                      / /|  / / /_/ / /_/ / / /_/ (__  )  __/
-                     /_/ |_/_/\__, /\__,_/_/\____/____/\___/ 
-                             /____/   
-    ]])
 end
 
 return Api
