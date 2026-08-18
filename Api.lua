@@ -64,7 +64,7 @@ function Api:Random()
 	return name
 end
 
-function Api:Notification(text, color, time)
+function Api:Notification(text, time)
     Notification.Notify("<font color='#00BFFF'>" .. text .. "</font>", time)
 end
 
@@ -88,7 +88,6 @@ function Api:Crash()
 end
 
 function Api:LoadEsp()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual"))()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua"))()
     if getgenv().Esp then
         Api.Esp = getgenv().Esp
