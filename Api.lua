@@ -92,7 +92,7 @@ function Api:Crash()
 end
 
 function Api:LoadEsp()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual"))()
+	--loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual"))()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua"))()
     if getgenv().Esp then
         Api.Esp = getgenv().Esp
