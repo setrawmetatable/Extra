@@ -65,11 +65,7 @@ function Api:Random()
 end
 
 function Api:Notification(text, color, time)
-    Notification:Notify({
-	    Message = "<font color='#00BFFF'>" .. text .. "</font>",
-	    BackgroundColor = color,
-	    Delay = time
-	})
+    Notification:Notify("<font color='#00BFFF'>" .. text .. "</font>", time)
 end
 
 function Api:CheckDevice()
