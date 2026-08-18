@@ -1,4 +1,4 @@
-local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif"))()
+local Notlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif"))()
 
 local Api = {
     Players = game:GetService("Players"),
@@ -65,7 +65,7 @@ function Api:Random()
 end
 
 function Api:Notification(text, time)
-    Notification.Notify("<font color='#00BFFF'>" .. text .. "</font>", time)
+    Notlib.Notify("<font color='#00BFFF'>" .. text .. "</font>", time)
 end
 
 function Api:CheckDevice()
