@@ -65,7 +65,7 @@ function Api:Random()
 end
 
 function Api:Notification(text, time)
-    Notlib.Notify("<font color='#00BFFF'>" .. text .. "</font>", time)
+    Notlib.Notify("<font color='#00BFFF'>" .. text .. "</font>", 3)
 end
 
 function Api:CheckDevice()
