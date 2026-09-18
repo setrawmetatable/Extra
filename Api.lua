@@ -53,7 +53,7 @@ end
 Api.CheckSupport = function()
     for i, sup in ipairs(Function) do
         if not sup.present then
-            Api:Kick("[Executor unsupported] " .. Api.executor .. " is not supported")
+            Api.Kick("[Executor unsupported] " .. Api.executor .. " is not supported")
             return false
         end
     end
@@ -77,7 +77,7 @@ end
 
 Api.CheckDevice = function()
     if Api.mobile then
-        Api:Kick("[Device unsupported] Mobile is not supported")
+        Api.Kick("[Device unsupported] Mobile is not supported")
         return true
     end
     return false
@@ -88,22 +88,6 @@ Api.Crash = function()
         Instance.new("Part").Parent = workspace
         local function z() z() end
         z()
-    end
-end
-
-Api.LoadEsp = function()
-    loadstring(game:HttpGet(Load.Esp))()
-    loadstring(game:HttpGet(Load.Visual))()
-    if getgenv().Esp then
-        Api.Esp = getgenv().Esp
-    end
-end
-
-Api.LoadCircle = function()
-    loadstring(game:HttpGet(Load.Crosshair))()
-    if getgenv().Settings then
-        Api.Crosshair = getgenv().Settings.Crosshair
-        Api.Circle = getgenv().Settings.Circle
     end
 end
 
@@ -124,6 +108,22 @@ Api.JoinDiscord = function()
                 })
             })
         end)
+    end
+end
+
+function Api:LoadEsp()
+    loadstring(game:HttpGet(Load.Esp))()
+    loadstring(game:HttpGet(Load.Visual))()
+    if getgenv().Esp then
+        self.Esp = getgenv().Esp
+    end
+end
+
+function Api:LoadCircle()
+    loadstring(game:HttpGet(Load.Crosshair))()
+    if getgenv().Settings then
+        self.Crosshair = getgenv().Settings.Crosshair
+        self.Circle = getgenv().Settings.Circle
     end
 end
 
