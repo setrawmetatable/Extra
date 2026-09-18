@@ -112,15 +112,14 @@ Api.JoinDiscord = function()
 end
 
 function Api:LoadEsp()
-    loadstring(game:HttpGet(Load.Esp))()
-    loadstring(game:HttpGet(Load.Visual))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua"))()
     if getgenv().Esp then
         Api.Esp = getgenv().Esp
     end
 end
 
 function Api:LoadCircle()
-    loadstring(game:HttpGet(Load.Crosshair))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Crosshair"))()
     if getgenv().Settings then
         Api.Crosshair = getgenv().Settings.Crosshair
         Api.Circle = getgenv().Settings.Circle
