@@ -1,3 +1,5 @@
+error(1)
+
 local Notlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif"))()
 
 local Api = {
