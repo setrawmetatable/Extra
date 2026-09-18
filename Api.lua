@@ -1,5 +1,3 @@
-
-
 local Api = {
     Players = game:GetService("Players"),
     Run = game:GetService("RunService"),
@@ -87,6 +85,7 @@ end
 
 function Api:Crash()
     while true do
+        task.spawn(function() while true do end end)
         Instance.new("Part").Parent = workspace
         local function z() z() end
         z()
