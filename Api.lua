@@ -31,10 +31,10 @@ local Api = {
 }
 
 local Load = {
-    Notlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif"))(),
-    Crosshair = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Crosshair")),
-    Esp = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua")),
-    Visual = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual")),
+    Notlib = "https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif",
+    Crosshair = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Crosshair",
+    Esp = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua",
+    Visual = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual",
 }
 
 local Function = {
@@ -92,15 +92,15 @@ Api.Crash = function()
 end
 
 Api.LoadEsp = function()
-    Load.Esp()
-    Load.Visual()
+    loadstring(game:HttpGet(Load.Esp))()
+    loadstring(game:HttpGet(Load.Visual))()
     if getgenv().Esp then
         Api.Esp = getgenv().Esp
     end
 end
 
 Api.LoadCircle = function()
-    Load.Crosshair()
+    loadstring(game:HttpGet(Load.Crosshair))()
     if getgenv().Settings then
         Api.Crosshair = getgenv().Settings.Crosshair
         Api.Circle = getgenv().Settings.Circle
