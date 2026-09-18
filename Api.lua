@@ -115,15 +115,15 @@ function Api:LoadEsp()
     loadstring(game:HttpGet(Load.Esp))()
     loadstring(game:HttpGet(Load.Visual))()
     if getgenv().Esp then
-        self.Esp = getgenv().Esp
+        Api.Esp = getgenv().Esp
     end
 end
 
 function Api:LoadCircle()
     loadstring(game:HttpGet(Load.Crosshair))()
     if getgenv().Settings then
-        self.Crosshair = getgenv().Settings.Crosshair
-        self.Circle = getgenv().Settings.Circle
+        Api.Crosshair = getgenv().Settings.Crosshair
+        Api.Circle = getgenv().Settings.Circle
     end
 end
 
