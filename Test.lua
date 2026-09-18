@@ -1,6 +1,3 @@
-error(1)
-
-local Notlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif"))()
 
 local Api = {
     Players = game:GetService("Players"),
@@ -26,10 +23,18 @@ local Api = {
 
     Mobile = game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService").MouseEnabled,
     Executor = identifyexecutor() or getexecutorname() or "Unknown",
+    Request = (syn and syn.request) or (psm and psm.request) or request,
 
     Esp = {},
     Crosshair = {},
     Circle = {},
+}
+
+local Load = {
+    Notlib = "https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif",
+    Crosshair = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Crosshair",
+    Esp = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua",
+    Visual = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual",
 }
 
 local Function = {
@@ -40,22 +45,22 @@ local Function = {
     {name = "getgc", present = type(getgc) == "function" and pcall(getgc) and type(getgc()) == "table"},
 }
 
-function Api:Kick(text)
+Api.Kick = function(text)
     Api.Player:Kick(text)
     return
 end
 
-function Api:CheckSupport()
+Api.CheckSupport = function()
     for i, sup in ipairs(Function) do
         if not sup.present then
-            Api:Kick("[Executor unsupported] " .. Api.executor .. " is not supported")
+            Api.Kick("[Executor unsupported] " .. Api.Executor .. " is not supported")
             return false
         end
     end
     return true
 end
 
-function Api:Random()
+Api.Random = function()
 	local chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	local name = ""
 	local lenght = math.random(5, 10)
@@ -66,31 +71,49 @@ function Api:Random()
 	return name
 end
 
-function Api:Notification(text, time)
-    Notlib.Notify("<font color='#00BFFF'>" .. text .. "</font>", 3)
+Api.Notification = function(text, time)
+    Load.Notlib.Notify("<font color='#00BFFF'>" .. text .. "</font>", 3)
 end
 
-function Api:CheckDevice()
+Api.CheckDevice = function()
     if Api.mobile then
-        Api:Kick("[Device unsupported] Mobile is not supported")
+        Api.Kick("[Device unsupported] Mobile is not supported")
         return true
     end
     return false
 end
 
-function Api:Crash()
+Api.Crash = function()
     while true do
-		for i = 1, 999 do
-			spawn(function() while true do end end)
-		end
         Instance.new("Part").Parent = workspace
         local function z() z() end
         z()
     end
 end
 
+Api.JoinDiscord = function()
+    if Api.Request then
+        pcall(function()
+            Api.Request({
+                Url = "http://127.0.0.1:6463/rpc?v=1",
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json",
+                    ["Origin"] = "https://discord.com"
+                },
+                Body = Api.Http:JSONEncode({
+                    cmd = "INVITE_BROWSER",
+                    args = {code = "Gc5QkQCdFA"},
+                    nonce = Api.Http:GenerateGUID(true)
+                })
+            })
+        end)
+    end
+end
+
 function Api:LoadEsp()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual"))()
     if getgenv().Esp then
         Api.Esp = getgenv().Esp
     end
@@ -101,28 +124,6 @@ function Api:LoadCircle()
     if getgenv().Settings then
         Api.Crosshair = getgenv().Settings.Crosshair
         Api.Circle = getgenv().Settings.Circle
-    end
-end
-
-function Api:JoinDiscord()
-    local http = (syn and syn.request) or (psm and psm.request) or request
-    if http then
-        pcall(function()
-            local HttpService = game:GetService("HttpService")
-            http({
-                Url = "http://127.0.0.1:6463/rpc?v=1",
-                Method = "POST",
-                Headers = {
-                    ["Content-Type"] = "application/json",
-                    ["Origin"] = "https://discord.com"
-                },
-                Body = HttpService:JSONEncode({
-                    cmd = "INVITE_BROWSER",
-                    args = {code = "Gc5QkQCdFA"},
-                    nonce = HttpService:GenerateGUID(true)
-                })
-            })
-        end)
     end
 end
 
