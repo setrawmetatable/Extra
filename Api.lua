@@ -1,4 +1,7 @@
 
+
+local Notlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif"))()
+
 local Api = {
     Players = game:GetService("Players"),
     Run = game:GetService("RunService"),
@@ -23,18 +26,10 @@ local Api = {
 
     Mobile = game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService").MouseEnabled,
     Executor = identifyexecutor() or getexecutorname() or "Unknown",
-    Request = (syn and syn.request) or (psm and psm.request) or request,
 
     Esp = {},
     Crosshair = {},
     Circle = {},
-}
-
-local Load = {
-    Notlib = "https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif",
-    Crosshair = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Crosshair",
-    Esp = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua",
-    Visual = "https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual",
 }
 
 local Function = {
@@ -45,22 +40,22 @@ local Function = {
     {name = "getgc", present = type(getgc) == "function" and pcall(getgc) and type(getgc()) == "table"},
 }
 
-Api.Kick = function(text)
+function Api:Kick(text)
     Api.Player:Kick(text)
     return
 end
 
-Api.CheckSupport = function()
+function Api:CheckSupport()
     for i, sup in ipairs(Function) do
         if not sup.present then
-            Api.Kick("[Executor unsupported] " .. Api.executor .. " is not supported")
+            Api:Kick("[Executor unsupported] " .. Api.executor .. " is not supported")
             return false
         end
     end
     return true
 end
 
-Api.Random = function()
+function Api:Random()
 	local chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	local name = ""
 	local lenght = math.random(5, 10)
@@ -71,43 +66,26 @@ Api.Random = function()
 	return name
 end
 
-Api.Notification = function(text, time)
-    Load.Notlib.Notify("<font color='#00BFFF'>" .. text .. "</font>", 3)
+function Api:Notification(text, time)
+    Notlib.Notify("<font color='#00BFFF'>" .. text .. "</font>", 3)
 end
 
-Api.CheckDevice = function()
+function Api:CheckDevice()
     if Api.mobile then
-        Api.Kick("[Device unsupported] Mobile is not supported")
+        Api:Kick("[Device unsupported] Mobile is not supported")
         return true
     end
     return false
 end
 
-Api.Crash = function()
+function Api:Crash()
     while true do
+		for i = 1, 999 do
+			spawn(function() while true do end end)
+		end
         Instance.new("Part").Parent = workspace
         local function z() z() end
         z()
-    end
-end
-
-Api.JoinDiscord = function()
-    if Api.Request then
-        pcall(function()
-            Api.Request({
-                Url = "http://127.0.0.1:6463/rpc?v=1",
-                Method = "POST",
-                Headers = {
-                    ["Content-Type"] = "application/json",
-                    ["Origin"] = "https://discord.com"
-                },
-                Body = Api.Http:JSONEncode({
-                    cmd = "INVITE_BROWSER",
-                    args = {code = "Gc5QkQCdFA"},
-                    nonce = Api.Http:GenerateGUID(true)
-                })
-            })
-        end)
     end
 end
 
@@ -123,6 +101,28 @@ function Api:LoadCircle()
     if getgenv().Settings then
         Api.Crosshair = getgenv().Settings.Crosshair
         Api.Circle = getgenv().Settings.Circle
+    end
+end
+
+function Api:JoinDiscord()
+    local http = (syn and syn.request) or (psm and psm.request) or request
+    if http then
+        pcall(function()
+            local HttpService = game:GetService("HttpService")
+            http({
+                Url = "http://127.0.0.1:6463/rpc?v=1",
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json",
+                    ["Origin"] = "https://discord.com"
+                },
+                Body = HttpService:JSONEncode({
+                    cmd = "INVITE_BROWSER",
+                    args = {code = "Gc5QkQCdFA"},
+                    nonce = HttpService:GenerateGUID(true)
+                })
+            })
+        end)
     end
 end
 
