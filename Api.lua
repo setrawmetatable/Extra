@@ -32,9 +32,7 @@ local Api = {
 local Load = {
     Notlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif"))(),
     Esp = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua")),
-	Visual = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Visual")),
 	Circle = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Crosshair")),
-
 }
 
 local Function = {
@@ -114,7 +112,6 @@ end
 
 function Api:LoadEsp()
     Load.Esp()
-	Load.Visual()
     if getgenv().Esp then
         Api.Esp = getgenv().Esp
     end
@@ -122,9 +119,8 @@ end
 
 function Api:LoadCircle()
     Load.Circle()
-    if getgenv().Settings then
-        Api.Crosshair = getgenv().Settings.Crosshair
-        Api.Circle = getgenv().Settings.Circle
+    if getgenv().Circle then
+        Api.Circle = getgenv().Circle
     end
 end
 
