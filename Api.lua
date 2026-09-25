@@ -25,14 +25,15 @@ local Api = {
     Request = (syn and syn.request) or (psm and psm.request) or request,
 
     Esp = {},
-    Crosshair = {},
     Circle = {},
+    Effect = {},
 }
 
 local Load = {
     Notlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Ui/refs/heads/main/Notif"))(),
     Esp = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Esp.lua")),
 	Circle = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Crosshair")),
+	Effect = loadstring(game:HttpGet("https://raw.githubusercontent.com/setrawmetatable/Extra/refs/heads/main/Effect.lua")),
 }
 
 local Function = {
@@ -121,6 +122,13 @@ function Api:LoadCircle()
     Load.Circle()
     if getgenv().Circle then
         Api.Circle = getgenv().Circle
+    end
+end
+
+function Api:LoadEffect()
+    Load.Effect()
+    if getgenv().Effect then
+        Api.Effect = getgenv().Effect
     end
 end
 
